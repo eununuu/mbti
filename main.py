@@ -56,8 +56,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# 3. 데이터 및 캐릭터 정의 (실제 움직이는 공식 GIF 애니메이션 주소 사용)
-# 이미지 링크가 활성화되지 않을 때를 대비해 로컬 이미지 불러오기 팁도 하단에 적어둘게요!
+# 3. 캐릭터 및 결과 매핑 데이터 (진짜 신나게 춤추고 해맑은 GIF 애니메이션 주소로 올킬!)
 character_db = {
     "치이카와 🐹": {
         "mbtis": ["INFP", "ISFP", "INFJ", "ISFJ"],
@@ -69,7 +68,8 @@ character_db = {
         "mbtis": ["ENFP", "ESFP", "ENFJ", "ESFJ"],
         "desc": "말을 유창하게 잘하고 매사에 초긍정적인 마인드를 가진 활기찬 친구예요! 어려운 처지 속에서도 '어떻게든 되겠지!'라며 해맑게 위기를 이겨내며, 주변 사람들에게 다정한 말과 에너지를 불어넣어 주는 진정한 리더이자 분위기 메이커입니다 🎵",
         "tag": "#초긍정 #호기심대왕 #어떻게든되겠지 #우정의콘서트",
-        "gif": "https://media.tenor.com/Iz0VY8qjc4MAAAAC/hachiware-chiikawa.gif"
+        # 하치와레와 치이카와가 함께 룰루랄라 무조건 신나게 어깨춤을 추는 해맑은 댄스 GIF
+        "gif": "https://media.tenor.com/ip-HUMGOc-oAAAAC/chiikawa-hachiware-dance.gif"
     },
     "우사기 🐰": {
         "mbtis": ["ENTP", "ESTP", "INTP", "ISTP"],
@@ -81,47 +81,52 @@ character_db = {
         "mbtis": ["ENTJ", "INTJ", "ESTJ", "ISTJ"],
         "desc": "귀여운 외모 속에 거대한 정복 야망을 품고 있는 자신감 넘치는 캐릭터예요! 자존감이 하늘을 찌르며 타인에게 끊임없이 '칭찬'과 '관심'을 당당하게 요구하지만, 그 당당함과 빈틈 가득한 반전 매력 덕분에 결코 미워할 수 없는 존재감을 자랑합니다 👑",
         "tag": "#야망가 #세상의중심은_나 #나를칭찬해라 #새침떼기공주",
-        "gif": "https://media.tenor.com/a_zv3hlKrEAAAAAi/mario-g.gif" # 모몬가/귀여운 댄스 대용 GIF
+        # 모몬가가 해맑게 씰룩쌜룩 치명적인 엉덩이 댄스를 추는 초귀여운 GIF
+        "gif": "https://media.tenor.com/Ga9mCjhiuToAAAAC/shaking-butt-shaking-rear.gif"
     }
 }
 
-# 4. 질문지 데이터 정의 (각 질문은 성향의 한쪽 축을 결정합니다)
+# 4. 질문지 데이터 정의 (겉으로는 MBTI 성향 단어가 전혀 보이지 않도록 분리 설계!)
 questions = [
     {
         "axis": "EI",
-        "text": "🎈 주말에 친한 친구가 예고도 없이 우리 집 앞에 찾아왔다! 나의 첫 생각은?",
+        "text": "🎈 주말에 친한 친구가 예고도 없이 우리 집 앞에 찾아왔다! 나의 진짜 속마음은?",
         "options": [
-            "우와 대박! 완전 깜짝 선물이다! 신나게 준비해서 당장 밖으로 뛰어나간다 🥳 (E 성향)",
-            "앗... 정말 기쁘고 고마운데... 오늘 나만의 힐링 시간이 필요했는데 조금 당황스럽다... 🏠 (I 성향)"
-        ]
+            "우와 대박! 완전 깜짝 선물이다! 신나게 준비해서 당장 밖으로 뛰어나간다 🥳",
+            "앗... 정말 기쁘고 고마운데... 오늘 나만의 힐링 시간이 필요했는데 조금 당황스럽다... 🏠"
+        ],
+        "mapping": ["E", "I"]  # 첫 번째 선택지는 E, 두 번째는 I로 내부 매핑
     },
     {
         "axis": "SN",
-        "text": "💎 길을 가다가 우연히 정말 독특하고 예쁘게 반짝이는 돌멩이를 발견했을 때 나의 행동은?",
+        "text": "💎 길을 가다가 우연히 정말 독특하고 예쁘게 반짝이는 돌멩이를 발견했을 때 나의 생각은?",
         "options": [
-            "우와 신기하게 생겼네! 혹시 비싼 보석인가 검색해 보거나 가만히 보고 둔다 🔍 (S 성향)",
-            "이건 어쩌면 과거 마법사들이 떨어뜨린 기억 소환석 아닐까? 혼자 판타지 소설을 집필하기 시작한다 🪄 (N 성향)"
-        ]
+            "우와 신기하게 생겼네! 혹시 비싼 보석인가 인터넷에 시세를 검색해 본다 🔍",
+            "이건 어쩌면 과거 마법사가 떨어뜨린 기억 소환석 아닐까? 가상의 시나리오를 상상해 본다 🪄"
+        ],
+        "mapping": ["S", "N"]  # 첫 번째 선택지는 S, 두 번째는 N으로 내부 매핑
     },
     {
         "axis": "TF",
-        "text": "😭 친구가 시험 점수를 생각보다 너무 못 받아서 우울하다며 속상하게 전화를 걸어왔다면?",
+        "text": "😭 시험 점수를 생각보다 너무 못 받아서 친구가 우울하다며 속상하게 전화를 걸어왔다면?",
         "options": [
-            "아고 속상하겠다... 어떤 과목이 아쉬웠어? 다음 시험엔 어떻게 준비할지 현실적인 조언과 전략을 세워준다 📊 (T 성향)",
-            "에구ㅠㅠ 정말 고생 많았는데 너무 슬프다... 고생한 너를 위해 맛있는 거 먹으러 가자고 위로를 건넨다 🍰 (F 성향)"
-        ]
+            "많이 속상하겠다ㅠㅠ 혹시 어떤 과목이 아쉬웠어? 다음 시험 공부법을 같이 고민해 준다 📊",
+            "에구ㅠㅠ 정말 열심히 한 거 내가 다 아는데 너무 속상하다... 오늘 맛있는 거 먹으러 가자고 위로한다 🍰"
+        ],
+        "mapping": ["T", "F"]  # 첫 번째 선택지는 T, 두 번째는 F로 내부 매핑
     },
     {
         "axis": "JP",
-        "text": "📝 방과 후에 친구들과 함께 떡볶이를 먹으러 가기로 약속했을 때 나의 모습은?",
+        "text": "📝 방과 후에 친구들과 함께 맛있는 떡볶이를 먹으러 가기로 약속했을 때 나의 행동은?",
         "options": [
-            "맛집 위치, 가볼 만한 카페 정보, 걸어갈 동선을 머릿속으로 미리 싹 정해놓는다 📍 (J 성향)",
-            "그냥 가기로 했으니까 이따 모여서 근처에 문 열려 있는 곳 아무 데나 가자고 생각한다 💨 (P 성향)"
-        ]
+            "맛집 위치, 영업 시간, 먹고 갈 예쁜 카페 동선까지 미리 싹 다 파악해 놓는다 📍",
+            "그냥 가기로 약속했으니 이따가 먹고 싶은 곳 눈에 띄면 들어가지 뭐! 하고 생각한다 💨"
+        ],
+        "mapping": ["J", "P"]  # 첫 번째 선택지는 J, 두 번째는 P로 내부 매핑
     }
 ]
 
-# 5. 세션 상태(Session State) 초기화 (스트림릿에서 페이지가 바뀌어도 데이터를 유지하게 해줍니다)
+# 5. 세션 상태(Session State) 초기화
 if "step" not in st.session_state:
     st.session_state.step = 0 # 0: 대기실, 1~4: 질문 단계, 5: 결과 페이지
 if "answers" not in st.session_state:
@@ -130,13 +135,14 @@ if "answers" not in st.session_state:
 # --- 6. 화면 구현 시작 ---
 
 st.markdown("<div class='title'>🌸 말랑말랑 먼작귀 MBTI 테스트 🌸</div>", unsafe_allow_html=True)
-st.markdown("<div class='subtitle'>나의 성향은 어떤 먼작귀 캐릭터와 꼭 닮아 있을까요?</div>", unsafe_allow_html=True)
+st.markdown("<div class='subtitle'>나의 숨겨진 성향은 어떤 먼작귀 캐릭터와 꼭 닮아 있을까요?</div>", unsafe_allow_html=True)
 
 # 6-1. 테스트 시작 대기실 (step 0)
 if st.session_state.step == 0:
-    st.image("https://media.tenor.com/98NGqBWbyrcAAAAj/%E3%81%A1%E3%81%84%E3%81%8F%E3%82%8F-chiikawa.gif", use_container_width=True) # 대문 일러스트
+    # 로고 일러스트로 귀엽게 시작
+    st.image("https://media.tenor.com/ip-HUMGOc-oAAAAC/chiikawa-hachiware-dance.gif", use_container_width=True)
     st.write("")
-    st.info("💡 **안내:** 단 4개의 질문으로 당신이 숨겨온 먼작귀 속 정체성을 완벽히 분석해 드립니다!")
+    st.info("💡 **안내:** 단 4개의 일상 질문으로 당신의 진짜 성향을 족집게처럼 분석해 드립니다!")
     if st.button("✨ 테스트 시작하기! (두근두근) ✨", use_container_width=True):
         st.session_state.step = 1
         st.session_state.answers = []
@@ -147,10 +153,10 @@ elif 1 <= st.session_state.step <= 4:
     q_index = st.session_state.step - 1
     current_q = questions[q_index]
     
-    # 진행 상황을 귀엽게 보여주는 프로그레스 바(ProgressBar)
+    # 진행 상황 프로그레스 바
     progress_val = (st.session_state.step - 1) / 4.0
     st.progress(progress_val)
-    st.write(f"📝 **{st.session_state.step}번째 탐험 중... (총 4문항)**")
+    st.write(f"📝 **{st.session_state.step}번째 질문지에 대답하는 중...**")
     
     st.markdown(f"""
         <div class="question-box">
@@ -158,9 +164,9 @@ elif 1 <= st.session_state.step <= 4:
         </div>
     """, unsafe_allow_html=True)
     
-    # 두 개의 답변 라디오 버튼 구성
+    # 두 개의 답변 라디오 버튼 (MBTI 힌트 완벽 차단!)
     choice = st.radio(
-        "마음에 드는 생각을 골라보세요!",
+        "당신의 선택은 무엇인가요?",
         options=current_q["options"],
         key=f"q_{st.session_state.step}"
     )
@@ -177,32 +183,33 @@ elif 1 <= st.session_state.step <= 4:
             
     with col2:
         if st.button("다음 질문으로 ➡️", use_container_width=True):
-            # 사용자가 선택한 답변의 맨 끝 괄호 안의 알파벳(E, I, S, N, T, F, J, P)을 추출하여 누적합니다.
-            selected_letter = choice.split("(")[-1][0]
+            # 사용자가 고른 선택지의 인덱스(0 또는 1)를 찾아, 매핑 테이블의 알파벳(E, I 등)을 가져옵니다.
+            selected_idx = current_q["options"].index(choice)
+            selected_letter = current_q["mapping"][selected_idx]
+            
+            # 사용자 답변 누적
             st.session_state.answers.append(selected_letter)
             st.session_state.step += 1
             st.rerun()
 
 # 6-3. 결과 도출 단계 (step 5)
 elif st.session_state.step == 5:
-    # 4글자의 MBTI 결과 생성 (예: "ENFP")
-    user_mbti = "".join(st.session_state.answers)
+    user_mbti = "".join(st.session_state.answers)  # 예: "ENFP"
     
-    with st.spinner('☁️ 당신과 꼭 닮은 먼작귀 친구를 소환 중입니다... 몽글몽글...☁️'):
+    with st.spinner('☁️ 당신의 영혼을 쏙 빼닮은 먼작귀 친구를 소환하는 중...☁️'):
         time.sleep(1.5)
         
     st.balloons() # 축하 풍선 팡팡! 🎉
     
-    # MBTI 결과에 따라 4대 대표 캐릭터 매핑
+    # MBTI 결과 매핑
     final_char = ""
     for char_name, info in character_db.items():
         if user_mbti in info["mbtis"]:
             final_char = char_name
             break
             
-    # 매핑되지 않는 외외의 성향이 생겼을 때의 예외 처리 (방어적 코드 설계 학습!)
     if not final_char:
-        final_char = "치이카와 🐹" # 기본값 지정
+        final_char = "치이카와 🐹"  # 안전 장치용 기본값
         
     result_info = character_db[final_char]
     
@@ -216,8 +223,8 @@ elif st.session_state.step == 5:
     """, unsafe_allow_html=True)
     
     st.write("")
-    # 귀여운 공식 캐릭터 GIF 이미지 띄우기!
-    st.image(result_info["gif"], caption=f"해맑게 움직이는 {final_char}의 모습 🌸", use_container_width=True)
+    # 귀여운 공식 캐릭터의 진짜 '해맑고 신나는' GIF 띄우기!
+    st.image(result_info["gif"], caption=f"신나게 움직이는 {final_char}의 모습 🌸", use_container_width=True)
     
     st.markdown(f"""
         <div style="background-color: #FFF; padding: 20px; border-radius: 15px; border: 1px solid #FFD1D1; margin-top: 15px; line-height: 1.6; text-align: justify; word-break: keep-all;">
